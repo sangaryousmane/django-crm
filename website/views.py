@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 
-from website.forms import SignUpForm
+from website.forms import SignUpForm, AddRecordForm
 from .models import Record
 
 
@@ -69,13 +69,28 @@ def customer_records(request, pk: int):
         return redirect('home')
 
 
-# Delete a customer record
+# Delete a user record
 def delete_record(request, pk: int):
     if is_auth(request):
         deleted = Record.objects.get(id=pk)
         deleted.delete()
         messages.success(request, "Record deleted successfully")
         return redirect('home')
+    else:
+        messages.error(request, "you must be logged in to perform this action")
+        return redirect('home')
+
+
+# Add a user
+def add_record(request):
+    form = AddRecordForm(request.POST or None)
+    if is_auth(request):
+        if request.method == 'POST':
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Record added successfully')
+                return redirect('home')
+        return render(request, 'add_record.html', {'form': form})
     else:
         messages.error(request, "you must be logged in to perform this action")
         return redirect('home')
