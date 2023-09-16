@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.db.models import Q
 from django.shortcuts import render, redirect
 
 from website.forms import SignUpForm, AddRecordForm
@@ -13,23 +14,28 @@ def is_auth(request) -> bool:
 
 # Create your views here.
 def home(request):
-    records = Record.objects.all()
-
-    if request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
-
-        # Authenticate users
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            messages.success(request, "You've been logged in!")
-            return redirect('home')
-        else:
-            messages.error(request, "There was an error logged in, please try again!")
-            return redirect('home')
+    if 'search' in request.GET:
+        search_query = request.GET['search']
+        mutiple_ = Q(Q(first_name__icontains=search_query) | Q(last_name__icontains=search_query))
+        record = Record.objects.filter(mutiple_)
+        return render(request, 'home.html', {'record': record})
     else:
-        return render(request, 'home.html', {'records': records})
+        records = Record.objects.all()
+        if request.method == "POST":
+            username = request.POST['username']
+            password = request.POST['password']
+
+            # Authenticate users
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                messages.success(request, "You've been logged in!")
+                return redirect('home')
+            else:
+                messages.error(request, "There was an error logged in, please try again!")
+                return redirect('home')
+        else:
+            return render(request, 'home.html', {'records': records})
 
 
 # logout user
@@ -109,3 +115,12 @@ def update_record(request, pk):
     else:
         messages.error(request, 'you must be logged in...')
         return redirect('home')
+
+# # Add search customers functionality
+# def search_list(request):
+#     search_query = request.POST.get('search')
+#     if search_query:
+#         records = Record.objects.filter(first_name__icontains=search_query)
+#     else:
+#         records = Record.objects.all()
+#     return render(request, 'home.html', {'records': records})

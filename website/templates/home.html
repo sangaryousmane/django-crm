@@ -3,6 +3,11 @@
 
     {% if user.is_authenticated %}
         <h1 align="center">User Profile Management System</h1><br>
+            <form class="d-flex" >
+                <input class="form-control me-2" type="search" placeholder="Search" name="search">
+                <button class="btn btn-outline-success">Search</button>
+            </form>
+        <br/>
         <table class="table table-striped table-hover table-bordered">
             <thead class="table-dark">
             <tr>
