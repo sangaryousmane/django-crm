@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="col-md-6 offset-md-3">
+        <h1>Update Record</h1>
+        <br/>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="id_first_name">First name:</label>
+                <input type="text" name="first_name" class="form-control" maxlength="50" required id="id_first_name">
+            </div>
+            <div class="mb-3">
+                <label for="id_last_name">Last name:</label>
+                <input type="text" name="last_name" maxlength="50" class="form-control" required id="id_last_name">
+            </div>
+            <div class="mb-3">
+                <label for="id_email">Email:</label>
+                <input type="text" name="email" maxlength="50" class="form-control" required id="id_email">
+            </div>
+            <div class="mb-3">
+                <label for="id_address">Address:</label>
+                <input type="text" name="address" maxlength="100" class="form-control" required id="id_address">
+            </div>
+            <div class="mb-3">
+                <label for="id_city">City:</label>
+                <input type="text" name="city" maxlength="50" class="form-control" required id="id_city">
+            </div>
+            <div class="mb-3">
+                <label for="id_state">State:</label>
+                <input type="text" name="state" maxlength="50" class="form-control" required id="id_state">
+            </div>
+            <div class="mb-3">
+                <label for="id_zipcode">Zipcode:</label>
+                <input type="text" name="zipcode" maxlength="20" class="form-control" required id="id_zipcode">
+            </div>
+           <div class="mb-3">
+                <label for="id_phone">Phone:</label>
+                <input type="text" name="phone" class="form-control" maxlength="15" required id="id_phone">
+            </div>
+            <br/>
+            <button type="submit" class="btn btn-secondary">Update Record</button>
+            <a href="{% url 'home' %}" class="btn btn-secondary">Back </a>
+        </form>
+    </div>
+{% endblock %}
