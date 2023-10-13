@@ -22,9 +22,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-t4x6a5bj7(j2%r&nfjw*l_^&&vqe2c_*)huk$ni6)q%vfevqrn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -73,12 +73,12 @@ WSGI_APPLICATION = 'dcrm.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'elderco',
-        'USER': 'root',
-        'PASSWORD': "",
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'customerdb',
+        'USER': 'postgres',
+        'PASSWORD': "831800",
         'HOST': "localhost",
-        "PORT": "3306"
+        "PORT": 5432
     }
 }
 

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="card text-center">
+        <div class="card-header">
+           <h1>404 - PAGE NOT FOUND</h1>
+        </div>
+        <div class="card-body">
+            <h2 class="card-title"> Wrong address</h2>
+            <p class="card-text">Ooops! nothing is here biggie.</p>
+            <a href="{% url 'home' %}" class="btn btn-primary">GO HOME</a>
+        </div>
+        <div class="card-footer text-body-secondary">
+           This is a custom error page
+        </div>
+    </div>
+{% endblock %}

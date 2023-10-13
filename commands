@@ -1,2 +1,4 @@
 python3 manage.py migrate
 python manage.py createsuperuser  # creates a super user
+python manage.py makemigrations model_name # run a migration for django
+py manage.py createsuperuser # Create an admin or superuser
